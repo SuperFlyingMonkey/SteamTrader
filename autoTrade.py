@@ -4,44 +4,23 @@ import requests
 import json
 import time
 #retrieves json file from market
-def getJson(url,name,el):
+def getJson(url,name):
     jFile = requests.get(url)
-    jString = jsonToString(jFile)
+    jFile = jFile.json()
     print(name)
-    print(parseString(jString,el))
-#converts json file to string ready to be manipulated
-def jsonToString(jFile):
-    jString = str(jFile.json())
-    return jString
+    print(parseString(jFile)+"\n")
+
 #seperates elements of string from json file
-def parseString(jsonString,item):
+def parseString(jString):
     print("parse out wanted values from returned string received from steam...")
-    lowestPrice = ""
-    volume = ""
-    medianPrice =""
+
+    lowestPrice = jString["lowest_price"]
+    volume = jString["volume"]
+    medianPrice = jString["median_price"]
     time.sleep(2)
-    jString = jsonString
-    el=0
-    for i in range(0,len(jString)):
-    
-        #if(jString[i]==","):
-        match el:
-            case 0:
-                lowestPrice = lowestPrice + jString[i]
-                   
-
-            case 1:
-                volume = volume + jString[i]
-                    
-
-            case 2:
-                medianPrice = medianPrice + jString[i]
-                
-        if(jString[i]==","):
-            el+=1
             
 
-    #jString = lowestPrice+" "+volume+" "+medianPrice
+    jString ="Lowest Price: "+ lowestPrice+", Volume: "+" "+volume+", Median Price: "+" "+medianPrice
     return jString
 
 
@@ -57,9 +36,9 @@ def itemValue(f):
     for i in range(3):
         name =f['item'][x]['Name']
         url =f['item'][x]['url']
-        getJson(url,name,i)
+        getJson(url,name)
         x+=1
-_ = system("clear")
+#_ = system("clear")
 print("<<<Steam Market Script 1.0>>>")
 print("Starting....\n")
 
