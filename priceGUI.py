@@ -5,6 +5,9 @@ height = root.winfo_screenheight()
 width = root.winfo_screenwidth()
 windowSize = str(height)+'x'+str(width)
 bgColour = '#1E5E59'
+options= ['Scar-20', 'Negev', 'Scout']
+selectedOption = StringVar(root)
+selectedOption.set('Make a Select')
 oldY = 0
 oldX = 0
 newX = 10
@@ -25,11 +28,19 @@ root.bind('<Configure>', on_resize)
 root.configure(bg=bgColour)
 root.minsize(650,400)
 
+
+
 image = Image.open('Scar20.jpeg')
 photo = ImageTk.PhotoImage(image)
 
-label = Label(root,image=photo, width=259,height=194)
-label.pack(anchor='nw',pady=5,padx=5)
+
+
+displayImage = Label(root,image=photo,bd=0,highlightthickness=0, width=265,height=200,bg='#206963')
+
+displayImage.pack(anchor='nw',pady=10,padx=5)
+
+itemMenu = OptionMenu(root,selectedOption,*options)
+itemMenu.pack(anchor='w',padx=10)
 
 graphFrame = Canvas(root,bd=0,highlightthickness=0,bg='#283030',height=str(height*0.25),width=width)
 
