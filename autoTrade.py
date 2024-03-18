@@ -8,10 +8,10 @@ def getJson(url,name):
 	jFile = requests.get(url)
 	jFile = jFile.json()
 	print(name)
-	print(parseString(jFile)+"\n")
+	print(parseJSON(jFile)+"\n")
 
 #seperates elements of string from json file
-def parseString(jString):
+def parseJSON(jString):
 	print("parse out wanted values from returned string received from steam...")
 	
 	lowestPrice = jString["lowest_price"]
@@ -19,12 +19,8 @@ def parseString(jString):
 	medianPrice = jString["median_price"]
 	time.sleep(2)
             
-
 	jString ="Lowest Price: "+ lowestPrice+", Volume: "+" "+volume+", Median Price: "+" "+medianPrice
 	return jString
-
-
-
 #reads file that contains urls for item to retieve info for
 def itemFileRead():
 	f = open('itemsLocations.json','r')
