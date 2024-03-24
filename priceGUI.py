@@ -9,6 +9,11 @@ bgColour = '#1E5E59'
 options= ['Scar-20', 'Negev', 'Scout']
 selectedOption = StringVar(root)
 selectedOption.set('Make a Select')
+graphHeight = height*0.25
+
+def point_flip(pointY, height):
+	y = height - pointY
+	return y
 
 def on_resize(event):
 	width = event.width
@@ -18,10 +23,10 @@ def draw_line(canvas,oldX,oldY,newX,newY):
 	canvas.create_line(oldX,oldY,newX,newY,fill='green',width=2)
 
 #This will be changed to draw the price graph later
-def draw_square():
+def draw_square(pointY,pointX):
 	
-	oldY = 25
-	oldX = 25
+	oldY = pointY
+	oldX = pointX
 	newX = oldX + 25
 	newY = oldY
 	#Line1
@@ -29,7 +34,7 @@ def draw_square():
 	oldX=newX
 	oldY=newY
 	newX=oldX
-	newY=oldY+25
+	newY=oldY-25
 	#Line2
 	draw_line(graphFrame,oldX,oldY,newX,newY)
 	oldX=newX
@@ -41,13 +46,11 @@ def draw_square():
 	oldX=newX
 	oldY=newY
 	newX=oldX
-	newY=oldY-25
+	newY=oldY+25
 	#Line4
 	draw_line(graphFrame,oldX,oldY,newX,newY)
+	#draw_line(graphFrame,0,0,25,pointY)
 					
-
-
-		
 
 root.geometry(windowSize)
 root.bind('<Configure>', on_resize)
@@ -67,6 +70,6 @@ itemMenu.pack(anchor='w',padx=10)
 graphFrame.pack(side=BOTTOM,pady=10,padx=5)
 
 
-draw_square()	
+draw_square(point_flip(100,graphHeight),150)	
 
 root.mainloop()
