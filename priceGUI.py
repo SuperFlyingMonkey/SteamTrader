@@ -1,6 +1,8 @@
 from tkinter import *
 from PIL import Image, ImageTk
+import subprocess
 import time 
+import autoTrade
 root = Tk()
 height = root.winfo_screenheight()
 width = root.winfo_screenwidth()
@@ -10,6 +12,18 @@ options= ['Scar-20', 'Negev', 'Scout']
 selectedOption = StringVar(root)
 selectedOption.set('Make a Select')
 graphHeight = height*0.25
+
+def get_prices():
+	low = autoTrade.get_lowest_price()
+	vol = autoTrade.get_volume()
+	med = autoTrade.get_median_price()
+	print(low)
+	print(med)
+	print(vol)
+
+def get_width(wdgt):
+	widthW = wdgt.winfo_width()
+	print(widthW)
 
 def point_flip(pointY, height):
 	y = height - pointY
@@ -63,13 +77,17 @@ photo = ImageTk.PhotoImage(image)
 displayImage = Label(root,image=photo,bd=0,highlightthickness=0, width=265,height=200,bg='#206963')
 itemMenu = OptionMenu(root,selectedOption,*options)
 graphFrame = Canvas(root,bd=0,highlightthickness=0,bg='#283030',height=str(height*0.25),width=width)
-
+button = Button(root, text = "testButton",command = get_prices)
 
 displayImage.pack(anchor='nw',pady=10,padx=5)
 itemMenu.pack(anchor='w',padx=10)
-graphFrame.pack(side=BOTTOM,pady=10,padx=5)
+graphFrame.pack(side=BOTTOM,pady=10,padx=10)
+graphWidth = graphFrame.winfo_width()
+button.pack(anchor='e',padx=10)
 
 
-draw_square(point_flip(100,graphHeight),150)	
+draw_square(point_flip(100,graphHeight),graphWidth)
+print(graphWidth)
+
 
 root.mainloop()

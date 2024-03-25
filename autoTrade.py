@@ -1,4 +1,3 @@
-#This is meant to automate steam market trades
 from os import system
 import requests
 import json
@@ -17,6 +16,8 @@ def parseJSON(jString):
 	lowestPrice = jString["lowest_price"]
 	volume = jString["volume"]
 	medianPrice = jString["median_price"]
+	
+
 	time.sleep(2)
             
 	jString ="Lowest Price: "+ lowestPrice+", Volume: "+" "+volume+", Median Price: "+" "+medianPrice
@@ -35,6 +36,24 @@ def itemValue(f):
 		url =f['item'][x]['url']
 		getJson(url,name)
 		x+=1
+#get Lowest Price
+def get_lowest_price():
+	jFile = requests.get('https://steamcommunity.com/market/priceoverview/?country=CA&currency=20&appid=730&market_hash_name=SCAR-20%20%7C%20Poultrygeist%20%28Field-Tested%29')
+	jFile = jFile.json()	
+	lowest = jFile['lowest_price']
+	return lowest
+def get_volume():
+	jFile = requests.get('https://steamcommunity.com/market/priceoverview/?country=CA&currency=20&appid=730&market_hash_name=SCAR-20%20%7C%20Poultrygeist%20%28Field-Tested%29')
+	jFile = jFile.json()	
+	volume = jFile['volume']
+	return volume
+def get_median_price():
+	jFile = requests.get('https://steamcommunity.com/market/priceoverview/?country=CA&currency=20&appid=730&market_hash_name=SCAR-20%20%7C%20Poultrygeist%20%28Field-Tested%29')
+	jFile = jFile.json()
+	median = jFile['median_price']
+
+	return median
+
 #Main
 _ = system("clear")
 print("<<<Steam Market Script 1.0>>>")
