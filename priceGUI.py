@@ -69,25 +69,26 @@ def draw_square(pointY,pointX):
 root.geometry(windowSize)
 root.bind('<Configure>', on_resize)
 root.configure(bg=bgColour)
-root.minsize(650,400)
+root.minsize(int(width*0.75),int(height*0.75))
 
 
-image = Image.open('Scar20.jpeg')
-photo = ImageTk.PhotoImage(image)
-displayImage = Label(root,image=photo,bd=0,highlightthickness=0, width=265,height=200,bg='#206963')
+#image = Image.open('Scar20.jpeg')
+#photo = ImageTk.PhotoImage(image)
+#displayImage = Label(root,image=photo,bd=0,highlightthickness=0, width=265,height=200,bg='#206963')
+outputs = Canvas(root,bd=0,highlightthickness=0,bg='#283030',height=str(height*0.25),width=width*0.10)
 itemMenu = OptionMenu(root,selectedOption,*options)
 graphFrame = Canvas(root,bd=0,highlightthickness=0,bg='#283030',height=str(height*0.25),width=width)
 button = Button(root, text = "testButton",command = get_prices)
 
-displayImage.pack(anchor='nw',pady=10,padx=5)
+
+#displayImage.pack(anchor='nw',pady=10,padx=5)
 itemMenu.pack(anchor='w',padx=10)
 graphFrame.pack(side=BOTTOM,pady=10,padx=10)
-graphWidth = graphFrame.winfo_width()
 button.pack(anchor='e',padx=10)
+outputs.place(relx=0.005,rely=0.5,anchor='w', x=-0, y=-50,relwidth=0.1,relheight=0.4)
 
 
 draw_square(point_flip(100,graphHeight),graphWidth)
-print(graphWidth)
 
 
 root.mainloop()
