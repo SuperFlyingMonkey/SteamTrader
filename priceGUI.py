@@ -3,6 +3,7 @@ from PIL import Image, ImageTk
 import subprocess
 import time 
 import autoTrade
+
 root = Tk()
 height = root.winfo_screenheight()
 width = root.winfo_screenwidth()
@@ -33,47 +34,48 @@ def on_resize(event):
 	
 	width = event.width
 	height = event.height
-	graphFrame.delete("line")
+	graphFrame.delete('line')
 	graphHeight = graphFrame.winfo_height()
+	draw_square(point_flip(3,graphHeight),3)
 
-
-	draw_square(point_flip(27,graphHeight),3)
-
-def draw_line(canvas,oldX,oldY,newX,newY):
-	canvas.create_line(oldX,oldY,newX,newY,fill='green',width=2, tags='line')
+def draw_line(canvas,oldX,oldY,newX,newY,colour):
+	canvas.create_line(oldX,oldY,newX,newY,fill=colour,width=2, tags='line')
 
 #This will be changed to draw the price graph later
 def draw_square(pointY,pointX):
 	
+	colour = 'green'
 	oldY = pointY
 	oldX = pointX
 	newX = oldX + 25
 	newY = oldY
 	#Line1
-	draw_line(graphFrame,oldX,oldY,newX,newY)
+	draw_line(graphFrame,oldX,oldY,newX,newY,colour)
 	oldX=newX
 	oldY=newY
 	newX=oldX
 	newY=oldY-25
 	#Line2
-	draw_line(graphFrame,oldX,oldY,newX,newY)
+	draw_line(graphFrame,oldX,oldY,newX,newY,colour)
 	oldX=newX
 	oldY=newY
 	newX=oldX-25
 	newY=oldY 
 	#Line3		
-	draw_line(graphFrame,oldX,oldY,newX,newY)
+	draw_line(graphFrame,oldX,oldY,newX,newY,colour)
 	oldX=newX
 	oldY=newY
 	newX=oldX
 	newY=oldY+25
 	#Line4
-	draw_line(graphFrame,oldX,oldY,newX,newY)
+	draw_line(graphFrame,oldX,oldY,newX,newY,colour)
 	#draw_line(graphFrame,0,0,25,pointY)
 					
 
+
 root.geometry(windowSize)
 root.bind('<Configure>', on_resize)
+root.title("SkinsPrices")
 root.configure(bg=bgColour)
 root.minsize(int(width*0.75),int(height*0.90))
 

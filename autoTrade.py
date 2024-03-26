@@ -6,8 +6,12 @@ import time
 def getJson(url,name):
 	jFile = requests.get(url)
 	jFile = jFile.json()
-	print(name)
-	print(parseJSON(jFile)+"\n")
+	fail = jFile["success"]	
+	if fail=="False":
+		print(jFile["success"])
+	else:
+		print(name)
+		print(parseJSON(jFile)+"\n")
 
 #seperates elements of string from json file
 def parseJSON(jString):
