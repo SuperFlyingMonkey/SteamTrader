@@ -11,7 +11,7 @@ bgColour = '#1E5E59'
 options= ['Scar-20', 'Negev', 'Scout']
 selectedOption = StringVar(root)
 selectedOption.set('Make a Select')
-graphHeight = height*0.25
+
 
 def get_prices():
 	low = autoTrade.get_lowest_price()
@@ -30,11 +30,17 @@ def point_flip(pointY, height):
 	return y
 
 def on_resize(event):
+	
 	width = event.width
 	height = event.height
+	graphFrame.delete("line")
+	graphHeight = graphFrame.winfo_height()
+
+
+	draw_square(point_flip(27,graphHeight),3)
 
 def draw_line(canvas,oldX,oldY,newX,newY):
-	canvas.create_line(oldX,oldY,newX,newY,fill='green',width=2)
+	canvas.create_line(oldX,oldY,newX,newY,fill='green',width=2, tags='line')
 
 #This will be changed to draw the price graph later
 def draw_square(pointY,pointX):
@@ -88,7 +94,6 @@ button.pack(anchor='e',padx=10)
 outputs.place(relx=0.005,rely=0.05,anchor='nw', x=-0, y=-50,relwidth=0.2,relheight=0.75)
 
 
-draw_square(point_flip(50,graphHeight),graphWidth)
 
 
 root.mainloop()
