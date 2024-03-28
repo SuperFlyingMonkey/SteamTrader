@@ -4,16 +4,6 @@ import subprocess
 import time 
 import autoTrade
 
-root = Tk()
-height = root.winfo_screenheight()
-width = root.winfo_screenwidth()
-windowSize = str(height)+'x'+str(width)
-bgColour = '#1E5E59'
-options= ['Scar-20', 'Negev', 'Scout']
-selectedOption = StringVar(root)
-selectedOption.set('Make a Select')
-
-
 def get_prices():
 	low = autoTrade.get_lowest_price()
 	vol = autoTrade.get_volume()
@@ -22,24 +12,31 @@ def get_prices():
 	print(med)
 	print(vol)
 
+#gets width of any widget 
 def get_width(wdgt):
 	widthW = wdgt.winfo_width()
 	print(widthW)
 
+#make it so that the origin point of the graph in in the bottom left and not the default top left 
 def point_flip(pointY, height):
 	y = height - pointY
 	return y
 
+
 def on_resize(event):
-	
 	width = event.width
 	height = event.height
 	graphFrame.delete('line')
 	graphHeight = graphFrame.winfo_height()
 	draw_square(point_flip(3,graphHeight),3)
 
+
 def draw_line(canvas,oldX,oldY,newX,newY,colour):
 	canvas.create_line(oldX,oldY,newX,newY,fill=colour,width=2, tags='line')
+
+
+	
+
 
 #This will be changed to draw the price graph later
 def draw_square(pointY,pointX):
@@ -69,10 +66,31 @@ def draw_square(pointY,pointX):
 	newY=oldY+25
 	#Line4
 	draw_line(graphFrame,oldX,oldY,newX,newY,colour)
-	#draw_line(graphFrame,0,0,25,pointY)
+
+def set_Image(*options):
+	imageName = selectedOption.get()
+	img = Image.open(imageName)
+	photo = ImageTk.PhotoImage(img)
+	displayImage.config(image=photo)
+	displayImage.image = photo
+
+
+
+root = Tk()
+height = root.winfo_screenheight()
+width = root.winfo_screenwidth()
+imageFile = 'noPhoto.jpeg'
+windowSize = str(height)+'x'+str(width)
+bgColour = '#1E5E59'
+options= ['noPhoto.jpeg','Scar20.jpeg', 'negev.jpeg', 'scout.jpeg']
+selectedOption = StringVar(root)
+selectedOption.set('noPhoto.jpeg')
+
+
+
 					
 
-
+#***build GUI***
 root.geometry(windowSize)
 root.bind('<Configure>', on_resize)
 root.title("SkinsPrices")
@@ -80,12 +98,10 @@ root.configure(bg=bgColour)
 root.minsize(int(width*0.75),int(height*0.90))
 
 
-image = Image.open('Scar20.jpeg')
-iWidth, iHeight = image.size
-photo = ImageTk.PhotoImage(image)
-outputs = Canvas(root,bd=0,highlightthickness=0.5,bg='#283030',height=str(height*0.25),width=iWidth*0.10)
-displayImage = Label(outputs,image=photo,bd=0,highlightthickness=0, width=265,height=200,bg='#206963')
-itemMenu = OptionMenu(outputs,selectedOption,*options)
+
+outputs = Canvas(root,bd=0,highlightthickness=0.5,bg='#283030',height=str(height*0.25),width=259*1.15)
+displayImage = Label(outputs,bd=0,highlightthickness=0, width=265,height=200,bg='#206963')
+itemMenu = OptionMenu(outputs, selectedOption, *options, command=set_Image)
 graphFrame = Canvas(root,bd=0,highlightthickness=0.5,bg='#283030',height=str(height*0.25),width=width)
 button = Button(root, text = "testButton",command = get_prices)
 graphWidth= graphFrame.winfo_width()
@@ -95,7 +111,8 @@ itemMenu.pack(anchor='w',padx=10)
 graphFrame.place(relx=0.005,rely=1.0, anchor='sw', x=-0,y=-10,relheight=0.25, relwidth=0.99)
 button.pack(anchor='e',padx=10)
 outputs.place(relx=0.005,rely=0.05,anchor='nw', x=-0, y=-50,relheight=0.75)
-
+#*****************
+set_Image()
 
 
 

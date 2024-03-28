@@ -7,6 +7,8 @@ def getJson(url,name):
 	jFile = requests.get(url)
 	jFile = jFile.json()
 	fail = jFile["success"]	
+
+	#check if request failed or passed 
 	if fail=="False":
 		print(jFile["success"])
 	else:
@@ -40,7 +42,8 @@ def itemValue(f):
 		url =f['item'][x]['url']
 		getJson(url,name)
 		x+=1
-#get Lowest Price
+
+#get individual values from the JSON file(lowestPrice, volume, and medianPrice)
 def get_lowest_price():
 	jFile = requests.get('https://steamcommunity.com/market/priceoverview/?country=CA&currency=20&appid=730&market_hash_name=SCAR-20%20%7C%20Poultrygeist%20%28Field-Tested%29')
 	jFile = jFile.json()	
