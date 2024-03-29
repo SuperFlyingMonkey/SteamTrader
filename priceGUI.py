@@ -4,6 +4,7 @@ import subprocess
 import time 
 import autoTrade
 
+#get values from autoTrade.py
 def get_prices(name):
 	print(name)
 	low = autoTrade.get_lowest_price(name)
@@ -34,10 +35,6 @@ def on_resize(event):
 
 def draw_line(canvas,oldX,oldY,newX,newY,colour):
 	canvas.create_line(oldX,oldY,newX,newY,fill=colour,width=2, tags='line')
-
-#get values from autoTrade.py
-
-	
 
 
 #This will be changed to draw the price graph later
@@ -91,16 +88,12 @@ selectedOption = StringVar(root)
 selectedOption.set('noPhoto.jpeg')
 
 
-
-					
-
 #***build GUI***
 root.geometry(windowSize)
 root.bind('<Configure>', on_resize)
 root.title("SkinsPrices")
 root.configure(bg=bgColour)
 root.minsize(int(width*0.75),int(height*0.90))
-
 
 
 outputs = Canvas(root,bd=0,highlightthickness=0.5,bg='#283030',height=str(height*0.25),width=259*1.15)

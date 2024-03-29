@@ -70,11 +70,6 @@ def get_lowest_price(name):
 			return lowest
 		
 
-
-
-
-
-
 def get_volume(name):
 	match name:
 		case 'Scar20.jpeg':
@@ -99,7 +94,6 @@ def get_volume(name):
 			volume = '0'
 			return volume
 		
-
 
 
 def get_median_price(name):
