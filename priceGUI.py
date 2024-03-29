@@ -96,14 +96,16 @@ root.configure(bg=bgColour)
 root.minsize(int(width*0.75),int(height*0.90))
 
 
-outputs = Canvas(root,bd=0,highlightthickness=0.5,bg='#283030',height=str(height*0.25),width=259*1.15)
+outputs = Canvas(root,bd=0,highlightthickness=0.5,bg='#283030',height=int(height*0.25),width=259*1.15)
 displayImage = Label(outputs,bd=0,highlightthickness=0, width=265,height=200,bg='#206963')
+valueBox = Label(outputs,bd=0,highlightthickness=0,bg='#206963',height= 50,width= int(outputs.winfo_width()*30))
 itemMenu = OptionMenu(outputs, selectedOption, *options, command=set_Image)
-graphFrame = Canvas(root,bd=0,highlightthickness=0.5,bg='#283030',height=str(height*0.25),width=width)
+graphFrame = Canvas(root,bd=0,highlightthickness=0.5,bg='#283030',height=int(height*0.25),width=width)
 graphWidth= graphFrame.winfo_width()
 
 displayImage.pack(anchor='nw',pady=20,padx=5)
 itemMenu.pack(anchor='w',padx=10)
+valueBox.pack(anchor='sw',padx=10,pady=5)
 graphFrame.place(relx=0.005,rely=1.0, anchor='sw', x=-0,y=-10,relheight=0.25, relwidth=0.99)
 outputs.place(relx=0.005,rely=0.05,anchor='nw', x=-0, y=-50,relheight=0.75)
 #*****************
