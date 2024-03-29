@@ -44,22 +44,91 @@ def itemValue(f):
 		x+=1
 
 #get individual values from the JSON file(lowestPrice, volume, and medianPrice)
-def get_lowest_price():
-	jFile = requests.get('https://steamcommunity.com/market/priceoverview/?country=CA&currency=20&appid=730&market_hash_name=SCAR-20%20%7C%20Poultrygeist%20%28Field-Tested%29')
-	jFile = jFile.json()	
-	lowest = jFile['lowest_price']
-	return lowest
-def get_volume():
-	jFile = requests.get('https://steamcommunity.com/market/priceoverview/?country=CA&currency=20&appid=730&market_hash_name=SCAR-20%20%7C%20Poultrygeist%20%28Field-Tested%29')
-	jFile = jFile.json()	
-	volume = jFile['volume']
-	return volume
-def get_median_price():
-	jFile = requests.get('https://steamcommunity.com/market/priceoverview/?country=CA&currency=20&appid=730&market_hash_name=SCAR-20%20%7C%20Poultrygeist%20%28Field-Tested%29')
-	jFile = jFile.json()
-	median = jFile['median_price']
+def get_lowest_price(name):
 
-	return median
+	match name:
+		case 'Scar20.jpeg':	
+			jFile = requests.get('https://steamcommunity.com/market/priceoverview/?country=CA&currency=20&appid=730&market_hash_name=SCAR-20%20%7C%20Poultrygeist%20%28Field-Tested%29')
+			jFile = jFile.json()	
+			lowest = jFile['lowest_price']
+			return lowest
+		
+		case 'negev.jpeg':	
+			jFile = requests.get("https://steamcommunity.com/market/priceoverview/?counrty=CA&currency=20&appid=730&market_hash_name=Negev%20%7C%20Ultralight%20%28Field-Tested%29")
+			jFile = jFile.json()	
+			lowest = jFile['lowest_price']
+			return lowest
+		
+		case 'scout.jpeg':	
+			jFile = requests.get('https://steamcommunity.com/market/priceoverview/?country=CA&currency=20&appid=730&market_hash_name=SSG%2008%20%7C%20Mainframe%20001%20%28Field-Tested%29')
+			jFile = jFile.json()	
+			lowest = jFile['lowest_price']
+			return lowest
+		
+		case 'noPhoto.jpeg':		
+			lowest = 'CDN$ 0.00'
+			return lowest
+		
+
+
+
+
+
+
+def get_volume(name):
+	match name:
+		case 'Scar20.jpeg':
+			jFile = requests.get('https://steamcommunity.com/market/priceoverview/?country=CA&currency=20&appid=730&market_hash_name=SCAR-20%20%7C%20Poultrygeist%20%28Field-Tested%29')
+			jFile = jFile.json()	
+			volume = jFile['volume']
+			return volume
+		
+		case 'negev.jpeg':
+			jFile = requests.get("https://steamcommunity.com/market/priceoverview/?counrty=CA&currency=20&appid=730&market_hash_name=Negev%20%7C%20Ultralight%20%28Field-Tested%29")
+			jFile = jFile.json()	
+			volume = jFile['volume']
+			return volume
+		
+		case 'scout.jpeg':
+			jFile = requests.get('https://steamcommunity.com/market/priceoverview/?country=CA&currency=20&appid=730&market_hash_name=SSG%2008%20%7C%20Mainframe%20001%20%28Field-Tested%29')
+			jFile = jFile.json()	
+			volume = jFile['volume']
+			return volume
+		
+		case 'noPhoto.jpeg':	
+			volume = '0'
+			return volume
+		
+
+
+
+def get_median_price(name):
+	
+	match name:
+		case 'Scar20.jpeg':
+			jFile = requests.get('https://steamcommunity.com/market/priceoverview/?country=CA&currency=20&appid=730&market_hash_name=SCAR-20%20%7C%20Poultrygeist%20%28Field-Tested%29')
+			jFile = jFile.json()
+			median = jFile['median_price']
+
+			return median
+		
+		case 'negev.jpeg':
+			jFile = requests.get("https://steamcommunity.com/market/priceoverview/?counrty=CA&currency=20&appid=730&market_hash_name=Negev%20%7C%20Ultralight%20%28Field-Tested%29")
+			jFile = jFile.json()
+			median = jFile['median_price']
+
+			return median
+		
+		case 'scout.jpeg':
+			jFile = requests.get('https://steamcommunity.com/market/priceoverview/?country=CA&currency=20&appid=730&market_hash_name=SSG%2008%20%7C%20Mainframe%20001%20%28Field-Tested%29')
+			jFile = jFile.json()
+			median = jFile['median_price']
+
+			return median
+		
+		case 'noPhoto.jpeg':
+			median = 'CDN$ 0.00'
+			return median
 
 #Main
 _ = system("clear")

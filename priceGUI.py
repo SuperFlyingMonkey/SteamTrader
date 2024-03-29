@@ -4,10 +4,11 @@ import subprocess
 import time 
 import autoTrade
 
-def get_prices():
-	low = autoTrade.get_lowest_price()
-	vol = autoTrade.get_volume()
-	med = autoTrade.get_median_price()
+def get_prices(name):
+	print(name)
+	low = autoTrade.get_lowest_price(name)
+	vol = autoTrade.get_volume(name)
+	med = autoTrade.get_median_price(name)
 	print(low)
 	print(med)
 	print(vol)
@@ -34,6 +35,7 @@ def on_resize(event):
 def draw_line(canvas,oldX,oldY,newX,newY,colour):
 	canvas.create_line(oldX,oldY,newX,newY,fill=colour,width=2, tags='line')
 
+#get values from autoTrade.py
 
 	
 
@@ -74,6 +76,8 @@ def set_Image(*options):
 	displayImage.config(image=photo)
 	displayImage.image = photo
 
+	get_prices(imageName)
+
 
 
 root = Tk()
@@ -103,13 +107,11 @@ outputs = Canvas(root,bd=0,highlightthickness=0.5,bg='#283030',height=str(height
 displayImage = Label(outputs,bd=0,highlightthickness=0, width=265,height=200,bg='#206963')
 itemMenu = OptionMenu(outputs, selectedOption, *options, command=set_Image)
 graphFrame = Canvas(root,bd=0,highlightthickness=0.5,bg='#283030',height=str(height*0.25),width=width)
-button = Button(root, text = "testButton",command = get_prices)
 graphWidth= graphFrame.winfo_width()
 
 displayImage.pack(anchor='nw',pady=20,padx=5)
 itemMenu.pack(anchor='w',padx=10)
 graphFrame.place(relx=0.005,rely=1.0, anchor='sw', x=-0,y=-10,relheight=0.25, relwidth=0.99)
-button.pack(anchor='e',padx=10)
 outputs.place(relx=0.005,rely=0.05,anchor='nw', x=-0, y=-50,relheight=0.75)
 #*****************
 set_Image()
