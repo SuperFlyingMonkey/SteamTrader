@@ -44,6 +44,7 @@ def itemValue(f):
 		x+=1
 
 #get individual values from the JSON file(lowestPrice, volume, and medianPrice)
+#TODO reduce repeated code 
 def get_lowest_price(name):
 
 	match name:
