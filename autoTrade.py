@@ -125,9 +125,3 @@ def get_median_price(name):
 			median = 'CDN$ 0.00'
 			return median
 
-#Main
-_ = system("clear")
-print("<<<Steam Market Script 1.0>>>")
-print("Starting....\n")
-
-itemValue(itemFileRead())

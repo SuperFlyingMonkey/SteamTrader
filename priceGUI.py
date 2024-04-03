@@ -19,7 +19,7 @@ def get_width(wdgt):
 	widthW = wdgt.winfo_width()
 	print(widthW)
 
-#make it so that the origin point of the graph in in the bottom left and not the default top left 
+#make it so that the origin point of the graph is on the bottom left and not the default top left 
 def point_flip(pointY, height):
 	y = height - pointY
 	return y
