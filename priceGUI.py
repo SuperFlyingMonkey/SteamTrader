@@ -25,6 +25,7 @@ def point_flip(pointY, height):
 	return y
 
 
+
 def on_resize(event):
 	width = event.width
 	height = event.height
@@ -81,7 +82,7 @@ root = Tk()
 height = root.winfo_screenheight()
 width = root.winfo_screenwidth()
 imageFile = 'noPhoto.jpeg'
-windowSize = str(height)+'x'+str(width)
+windowSize = str(int(width*0.75))+'x'+str(int(height*0.85))
 bgColour = '#1E5E59'
 options= ['noPhoto.jpeg','Scar20.jpeg', 'negev.jpeg', 'scout.jpeg']
 selectedOption = StringVar(root)
@@ -93,7 +94,7 @@ root.geometry(windowSize)
 root.bind('<Configure>', on_resize)
 root.title("SkinsPrices")
 root.configure(bg=bgColour)
-root.minsize(int(width*0.75),int(height*0.90))
+root.minsize(int(width*0.50),int(height*0.60))
 
 
 outputs = Canvas(root,bd=0,highlightthickness=0.5,bg='#283030',height=int(height*0.25),width=259*1.15)

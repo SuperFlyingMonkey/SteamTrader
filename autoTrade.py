@@ -1,3 +1,4 @@
+#TODO clean up code, make current code fit with current use case
 from os import system
 import requests
 import json
