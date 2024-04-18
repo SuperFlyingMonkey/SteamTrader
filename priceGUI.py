@@ -64,12 +64,14 @@ def set_Image(*options):
 	photo = ImageTk.PhotoImage(img)
 	displayImage.config(image=photo)
 	displayImage.image = photo
+
+	#get and display data (done in set_Image so data changes to match image)
 	low = autoTrade.get_lowest_price(imageName)
 	vol = autoTrade.get_volume(imageName)
 	med = autoTrade.get_median_price(imageName)
-	lowest.config(text='lowest:'+ low, fg='red')
-	median.config(text='median:'+ med,fg='red')
-	volume.config(text='volume:'+ vol,fg='red')
+	lowest.config(text='lowest:'+ low, fg='#ffffff')
+	median.config(text='median:'+ med,fg='#ffffff')
+	volume.config(text='volume:'+ vol,fg='#ffffff')
 
 
 root = Tk()
@@ -95,9 +97,9 @@ outputs = Canvas(root,bd=0,highlightthickness=0.5,bg='#283030',height=int(height
 displayImage = Label(outputs,bd=0,highlightthickness=0, width=265,height=200,bg='#206963')
 valueBox = Label(outputs,bd=0,highlightthickness=0,bg='#206963',height= 50,width= int(outputs.winfo_width()*30))
 itemMenu = OptionMenu(outputs, selectedOption, *options, command=set_Image)
-lowest = Label(valueBox,bd=0, highlightthickness=0, width=25,text='lowest', height =2, bg='#000000')
-median = Label(valueBox,bd=0, highlightthickness=0, width=25,text='median', height =2, bg='#000000')
-volume = Label(valueBox,bd=0, highlightthickness=0, width=25,text='volume', height =2, bg='#000000')
+lowest = Label(valueBox,bd=0, highlightthickness=0, width=25,text='lowest', height =2, bg=bgColour)
+median = Label(valueBox,bd=0, highlightthickness=0, width=25,text='median', height =2, bg=bgColour)
+volume = Label(valueBox,bd=0, highlightthickness=0, width=25,text='volume', height =2, bg=bgColour)
 
 
 graphFrame = Canvas(root,bd=0,highlightthickness=0.5,bg='#283030',height=int(height*0.25),width=width)
@@ -107,9 +109,9 @@ graphWidth= graphFrame.winfo_width()
 displayImage.pack(anchor='nw',pady=20,padx=5)
 itemMenu.pack(anchor='w',padx=10)
 valueBox.pack(anchor='sw',padx=10,pady=5)
-lowest.place(anchor='nw',rely=0.025, relheight=0.05)
-median.place(anchor='nw', rely=0.075, relheight=0.05)
-volume.place(anchor='nw', rely=0.125, relheight=0.05)
+lowest.place(anchor='nw', rely=0.12,relwidth=0.65, relheight=0.1)
+median.place(anchor='nw', rely=0.24,relwidth=0.65, relheight=0.1)
+volume.place(anchor='nw', rely=0.36,relwidth=0.65, relheight=0.1)
 graphFrame.place(relx=0.005,rely=1.0, anchor='sw', x=-0,y=-10,relheight=0.25, relwidth=0.99)
 outputs.place(relx=0.005,rely=0.05,anchor='nw', x=-0, y=-50,relheight=0.75)
 #*****************
